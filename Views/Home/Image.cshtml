@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Image";
+}
+@using (Html.BeginForm("Image", "Home", FormMethod.Post, new {enctype="multipart/form-data"}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h2>Image</h2>
+        <div>
+            <p>Hi,This is my new project</p>
+            <p>@ViewBag.Message</p>
+            <p>
+                <label>Upload Image</label>
+                <input type="file" name="file" value="browse"/>            </p>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="upload" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+}

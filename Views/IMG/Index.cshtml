@@ -1,0 +1,104 @@
+﻿@model ImageMVC.Models.IMG
+
+@{
+    ViewBag.Title = "Malathy Gallery";
+
+
+}
+
+<h2>Images</h2>
+@using (Html.BeginForm("UploadFiles", "IMG", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.file, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.file, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                @Html.ValidationMessageFor(model => model.file, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Upload" class="btn btn-primary" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10 text-success">
+                @ViewBag.FileStatus
+            </div>
+        </div>
+    </div>
+}
+    <div class="row">
+        <div class="col container">
+            @using (Html.BeginForm("ShowIMG", "IMG", FormMethod.Post))
+            {
+            <div class="col-10">
+                <b>Search By:</b>
+
+                @Html.TextBoxFor(model => model.Search)
+                @*<a href='@Url.Action("ShowIMG", "IMG", routeValues: new { fileName = +".jpg" })' class="btn btn-primary">Search</a>*@
+                <button type="submit">Search</button>
+               
+
+            </div>
+                    }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col container">
+
+            <div class="col-10">
+                <table cellpadding="5" cellspacing="10" border="1">
+                    <thead>
+                        <tr>
+                            <td><b>Image</b></td>
+                            <td><b>Link</b></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+
+                        @foreach (var items in
+                            Model.imgList)
+                        {
+                            //Removing local folder path
+                            FileInfo fi = new FileInfo(items);
+                            // and aligning server link
+                            var imgPath = "../../UploadedFiles/" + fi.Name;
+
+                            <tr>
+                                <td>
+                                    <a href="@imgPath" target="_blank">
+                                        <img class="float-left p-2" src="@imgPath" title="@fi.Name" height="150" />
+                                       
+                                    </a>
+                                </td>
+                                <td>
+                                    @Html.ActionLink(fi.Name, "ShowIMG", "IMG", routeValues: new { fileName = fi.Name }, htmlAttributes: null)
+                                </td>
+                            </tr>
+
+                        }
+
+                    </tbody>
+                </table>
+
+
+
+            </div>
+        </div>
+    </div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+

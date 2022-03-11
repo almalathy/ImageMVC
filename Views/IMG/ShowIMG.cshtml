@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "ShowIMG";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>ShowIMG</h2>
+
+<div class="row">
+    <div class="col container">
+        <div class="col-10">
+            @{
+                var imgPath = "../../UploadedFiles/" + ViewBag.fileName;
+            }
+            <p><label>FileName:</label> @ViewBag.fileName </p>
+            <br />
+            <img src="@imgPath" title="@ViewBag.fileName" />
+
+        </div>
+    </div><br />
+    @Html.ActionLink("Back to Gallery", "Index")
+</div>
+
