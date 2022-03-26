@@ -12,6 +12,8 @@ namespace ImageMVC.Models
         [Display(Name = "Name")]
         public string StudentName { get; set; }
         public int Age { get; set; }
+        public string Degree { get; set; }
+        public int Marks { get; set; }
 
         /*  internal void DeleteStudent(int id)
           {

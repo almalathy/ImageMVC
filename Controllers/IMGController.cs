@@ -74,7 +74,6 @@ namespace ImageMVC.Controllers
         }
 
 
-
         private IMG ImageRetrieve()
         {
             IMG img = new Models.IMG();
